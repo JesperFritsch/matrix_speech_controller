@@ -7,7 +7,7 @@ name = "mtx_ctl"
 version = "0.1.0"
 description = "A project for controlling a running https://github.com/JesperFritsch/home_led_matrix application"
 authors = [
-    { name = "Jesper Fritsch", email = "jesper.fritsch@volvocars.com" }
+    { name = "Jesper Fritsch", email = "jesperf96@gmail.com" }
 ]
 dependencies = [
     "vosk",
