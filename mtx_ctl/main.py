@@ -50,6 +50,8 @@ def main():
         listener = CommandListener(activates, deactivates)
         stop_event = Event()
         agent_thread = Thread(target=agent_worker, args=(agent, cmd_queue, stop_event))
+        agent_thread.daemon = True
+        agent_thread.start()
         listener.listen(cmd_queue)
     except KeyboardInterrupt:
         print("keyboard interrupt main")
@@ -57,6 +59,7 @@ def main():
         log.error(e, exc_info=True)
     finally:
         stop_event.set()
+        agent_thread.join()
 
 
 if __name__ == "__main__":

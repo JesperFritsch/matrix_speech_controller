@@ -67,11 +67,9 @@ class CommandListener:
                 if self._recognizer.AcceptWaveform(data):
                     # Get the full recognized phrase
                     result = json.loads(self._recognizer.Result())
-                    print(result)
-                    cmd_text = result.get('text', '')
+                    cmd_text = cmd_text = result.get("text", "") or result.get("alternatives", [{}])[0].get("text", "")
                     if self._is_active():
                         self._register_command(cmd_text)
-                    print(any(x in cmd_text for x in self._deactivation_phrases), self._deactivation_phrases, cmd_text)
                     if self._is_active() and any(x in cmd_text for x in self._deactivation_phrases):
                         self._deactivate()
                 else:
