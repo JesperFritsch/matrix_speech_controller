@@ -23,3 +23,8 @@ class ILLMAgent(ABC):
             system_info (dict): a dictionary with information about the system
         """
         pass
+
+    @abstractmethod
+    def reset_history(self):
+        """ Reset the agent's history """
+        pass

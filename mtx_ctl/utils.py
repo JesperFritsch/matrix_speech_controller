@@ -1,5 +1,13 @@
 import docstring_parser
-import re
+
+
+class SingletonMeta(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            instance = super().__call__(*args, **kwargs)
+            cls._instances[cls] = instance
+        return cls._instances[cls]
 
 
 def get_tool_definition(obj):
@@ -9,7 +17,6 @@ def get_tool_definition(obj):
     fn_props = {}
     for param in doc_obj.params:
         param_info = {}
-        param_info["name"] = param.arg_name
         param_info["type"] = param.type_name
         param_info["description"] = param.description
         fn_props[param.arg_name] = param_info
